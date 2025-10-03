@@ -100,37 +100,36 @@ delimiter ;
 call reverseNumber(123);
 
 //////////////////Nth number fabnocci series///////////////////
-DELIMITER //
+delimiter //
 
-DROP PROCEDURE IF EXISTS fibonacci;
+drop procedure if exists fibonacci;
 
-CREATE PROCEDURE fibonacci(IN n INT)
-BEGIN
-    DECLARE a INT DEFAULT 0;
-    DECLARE b INT DEFAULT 1;
-    DECLARE c INT;
-    DECLARE i INT DEFAULT 1;
-
-    -- Temporary table बनाएँ result collect करने के लिए
-    DROP TEMPORARY TABLE IF EXISTS temp_fib;
-    CREATE TEMPORARY TABLE temp_fib (
-        term_no INT,
-        value INT
+create procedure fibonacci(in n int)
+begin
+    declare a int default 0;
+	declare  b int default 1;
+	declare  c int;
+	declare  i int default 1;
+    
+    drop temporary table if exists temp_fib;
+    create temporary table temp_fib (
+        term_no int,
+        value int
     );
 
-    WHILE i <= n DO
-        INSERT INTO temp_fib VALUES (i, a);
-        SET c = a + b;
-        SET a = b;
-        SET b = c;
-        SET i = i + 1;
-    END WHILE;
+    while i <= n do
+        insert into temp_fib values (i, a);
+        set c = a + b;
+        set a = b;
+        set b = c;
+        set i = i + 1;
+    end while;
 
-    -- एक ही grid में पूरा output दिखेगा
-    SELECT * FROM temp_fib;
-END //
 
-DELIMITER ;
+    select * from temp_fib;
+end //
+
+delimiter ;
 
 call fibonacci(5);
 
