@@ -135,4 +135,38 @@ call fibonacci(5);
 
 
 
+//////////////check Prime Number////////////////////
+
+delimiter //
+
+/*drop procedure if exists checkPrimeNumber;*/
+
+create procedure checkPrimeNumber(in num int)
+begin 
+declare i int default 2;
+declare isPrime boolean default true;
+
+if num <= 1 then 
+set isPrime = false;
+else
+while i <= num/2 do
+if ( num % i = 0) then 
+set isPrime = false;
+end if;
+set i = i+1;
+end while;
+end if;
+
+if isPrime then 
+select concat(num, " is prime") as result;
+else
+select concat(num, " is not prime") as result;
+end if;
+end //
+delimiter ;
+
+call checkPrimeNumber(99)
+
+
+
 
